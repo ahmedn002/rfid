@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "278333557046",
+    "project_id": "attendance-development",
+    "storage_bucket": "attendance-development.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:278333557046:android:75aca597957dfd75d18b97",
+        "android_client_info": {
+          "package_name": "com.example.rfid_system"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1GS40cP4tcxKcYKbwrY_jO-h5IPRWmy4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:278333557046:android:d1b4ad218a810a64d18b97",
+        "android_client_info": {
+          "package_name": "com.system.rfidAttendance"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1GS40cP4tcxKcYKbwrY_jO-h5IPRWmy4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
