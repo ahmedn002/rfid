@@ -11,6 +11,9 @@ class StudentDashboardModel {
   }) {
     attendanceWarnings = {};
     for (int i = 0; i < courseData.length; i++) {
+      if (courseData[i].concludedSessionsCount == 0) {
+        continue;
+      }
       final int attendance = courseData[i].getStudentAttendance(studentId);
       if (attendance <= 50) {
         attendanceWarnings[courseData[i]] = attendance;

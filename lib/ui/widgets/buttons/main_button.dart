@@ -54,7 +54,14 @@ class MainButton extends StatelessWidget {
             : Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  if (icon != null) icon!,
+                  if (icon != null)
+                    ColorFiltered(
+                      colorFilter: const ColorFilter.mode(
+                        AppColors.background,
+                        BlendMode.srcIn,
+                      ),
+                      child: icon!,
+                    ),
                   if (icon != null) 10.horizontalSpace,
                   Text(
                     text,

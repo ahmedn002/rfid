@@ -25,7 +25,7 @@ class CourseData {
   }
 
   void _findConcludedSessions() {
-    concludedSessions = sessions.where((session) => session.endTime != null || session.concluded).toList();
+    concludedSessions = sessions.where((session) => session.concluded).toList();
     concludedSessionsCount = concludedSessions.length;
   }
 
@@ -34,7 +34,7 @@ class CourseData {
   }
 
   void _findScheduledSessions() {
-    scheduledSessions = sessions.where((session) => session.startTime == null).toList();
+    scheduledSessions = sessions.where((session) => !session.concluded).toList();
   }
 
   void _findNextSession() {

@@ -33,7 +33,6 @@ class StudentServices {
     });
   }
 
-  // Login
   static Future<FirebaseResponseWrapper<Student?>> login(String username, String password) async {
     QuerySnapshot studentsThatFitCredentials = await FirebaseFirestore.instance
         .collection(
@@ -65,7 +64,13 @@ class StudentServices {
     bool hasError = false;
 
     // Get all usernames and compare
-    QuerySnapshot usernames = await FirebaseFirestore.instance.collection('Students').where('username', isEqualTo: student.username).get();
+    QuerySnapshot usernames = await FirebaseFirestore.instance
+        .collection(
+          'Students',
+        )
+        .where('username', isEqualTo: student.username)
+        .get();
+
     if (usernames.docs.isNotEmpty) {
       return FirebaseResponseWrapper(
         data: false,
@@ -74,9 +79,16 @@ class StudentServices {
       );
     }
 
-    await FirebaseFirestore.instance.collection('Students').doc(student.id).set(student.toJson()).catchError((error) {
+    await FirebaseFirestore.instance
+        .collection(
+          'Students',
+        )
+        .doc(student.id)
+        .set(student.toJson())
+        .catchError((error) {
       hasError = true;
     });
+
     if (hasError) {
       return FirebaseResponseWrapper(
         data: false,

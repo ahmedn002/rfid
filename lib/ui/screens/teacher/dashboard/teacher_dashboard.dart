@@ -72,14 +72,12 @@ class _TeacherDashboardState extends State<TeacherDashboard> {
                   ),
                   8.verticalSpace,
                   Expanded(
-                    flex: 3,
+                    flex: 4,
                     child: Row(
                       children: [
                         Expanded(
                           child: CarouselSlider(
-                            items: [
-                              ...model.courses.map((courseData) => CourseCard(courseData: courseData)).toList(),
-                            ],
+                            items: model.courses.map((courseData) => CourseCard(courseData: courseData)).toList(),
                             options: CarouselOptions(
                               viewportFraction: 0.8,
                               enlargeCenterPage: true,
@@ -105,13 +103,16 @@ class _TeacherDashboardState extends State<TeacherDashboard> {
                   ),
                   8.verticalSpace,
                   Expanded(
-                    flex: 9,
+                    flex: 11,
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.w),
                       child: ListView.separated(
                         itemCount: _teacherSchedule.length,
                         itemBuilder: (context, index) {
-                          return SessionTile(sessionData: _teacherSchedule[index], color: _courseColors[_teacherSchedule[index].values.first['courseCode']]!);
+                          return SessionTile(
+                            sessionData: _teacherSchedule[index],
+                            color: _courseColors[_teacherSchedule[index].values.first['courseCode']]!,
+                          );
                         },
                         separatorBuilder: (context, index) => 16.verticalSpace,
                       ),

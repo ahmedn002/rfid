@@ -79,12 +79,13 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> {
               Text('Courses', style: TextStyles.title),
               8.verticalSpace,
               Expanded(
-                child: ListView.builder(
+                child: ListView.separated(
                   itemCount: courses.length,
                   itemBuilder: (context, index) => CourseCard(
                     courseData: courses[index],
                     isStudent: true,
                   ),
+                  separatorBuilder: (context, index) => 8.verticalSpace,
                 ),
               ),
             ],

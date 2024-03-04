@@ -72,13 +72,13 @@ class _DropDownMenuState extends State<DropDownMenu> {
         filled: true,
         fillColor: Colors.transparent,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(100.r),
+          borderRadius: BorderRadius.circular(20.r),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(100.r),
+          borderRadius: BorderRadius.circular(20.r),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(100.r),
+          borderRadius: BorderRadius.circular(20.r),
         ),
         contentPadding: EdgeInsets.zero,
         hintStyle: TextStyles.bodySecondary.apply(fontWeightDelta: 2),

@@ -9,7 +9,13 @@ class ResetPasswordServices {
     // Getting Id from username
     String id = '';
     try {
-      await FirebaseFirestore.instance.collection(collection).where('username', isEqualTo: username).get().then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
+      await FirebaseFirestore.instance
+          .collection(
+            collection,
+          )
+          .where('username', isEqualTo: username)
+          .get()
+          .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
         id = querySnapshot.docs.first.id;
       });
     } catch (e) {

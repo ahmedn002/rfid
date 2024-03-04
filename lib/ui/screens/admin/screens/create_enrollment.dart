@@ -47,6 +47,7 @@ class _CreateEnrollmentScreenState extends State<CreateEnrollmentScreen> {
   final Map<String, DateTime> _dayStartHours = {};
   int _hours = 1;
   int _sessions = 1;
+  final TextEditingController _sessionCountController = TextEditingController();
   DateTime _startDate = DateTime.now();
   final TextEditingController _searchController = TextEditingController();
   String _searchParameter = '';
@@ -281,15 +282,14 @@ class _CreateEnrollmentScreenState extends State<CreateEnrollmentScreen> {
                       children: [
                         Expanded(
                           flex: 10,
-                          child: Slider(
-                            value: _sessions.toDouble(),
-                            min: 1,
-                            max: 14,
-                            divisions: 13,
-                            label: _sessions.toString(),
-                            onChanged: (double value) {
+                          child: InputField(
+                            controller: _sessionCountController,
+                            hintText: 'Number of sessions',
+                            icon: Icons.calendar_today_rounded,
+                            keyboardType: TextInputType.number,
+                            onChanged: (value) {
                               setState(() {
-                                _sessions = value.toInt();
+                                _sessions = int.tryParse(value) ?? 0;
                               });
                             },
                           ),
@@ -575,7 +575,7 @@ class _CreateEnrollmentScreenState extends State<CreateEnrollmentScreen> {
     if (_courseId.isEmpty || _teacherId.isEmpty || _selectedDays.isEmpty || _hours == 0 || _sessions == 0 || _studentIds.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Please fill all the fields.'),
+          content: Text('Error: Please fill all the fields and make sure they are valid.'),
           backgroundColor: AppColors.accent,
         ),
       );

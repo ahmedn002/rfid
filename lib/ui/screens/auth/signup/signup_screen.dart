@@ -166,7 +166,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   void _signUp() {
     if (_formKey.currentState!.validate()) {
-      final String id;
       if (isStudent) {
         RequestHandler.handleRequest(
           context: context,

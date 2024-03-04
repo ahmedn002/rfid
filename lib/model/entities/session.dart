@@ -78,6 +78,38 @@ class Session implements IdCreator {
     return (attended.length / (attended.length + absent.length + sickLeave.length) * 100).toInt();
   }
 
+  Session copyWith({
+    String? id,
+    List<String>? absent,
+    List<String>? attended,
+    List<String>? sickLeave,
+    String? courseName,
+    String? enrollmentID,
+    DateTime? expectedStartTime,
+    DateTime? startTime,
+    DateTime? expectedEndTime,
+    DateTime? endTime,
+    bool? state,
+    bool? concluded,
+    num? attendance,
+  }) {
+    return Session(
+      id: id ?? this.id,
+      absent: absent ?? this.absent,
+      attended: attended ?? this.attended,
+      sickLeave: sickLeave ?? this.sickLeave,
+      courseName: courseName ?? this.courseName,
+      enrollmentID: enrollmentID ?? this.enrollmentID,
+      expectedStartTime: expectedStartTime ?? this.expectedStartTime,
+      startTime: startTime ?? this.startTime,
+      expectedEndTime: expectedEndTime ?? this.expectedEndTime,
+      endTime: endTime ?? this.endTime,
+      state: state ?? this.state,
+      concluded: concluded ?? this.concluded,
+      attendance: attendance ?? this.attendance,
+    );
+  }
+
   @override
   String createId() {
     return 'A${Random().nextInt(9999)}';

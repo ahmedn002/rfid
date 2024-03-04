@@ -26,7 +26,7 @@ class EnrollmentServices {
       );
     }
 
-    List<Session> sessions = SessionServices.calculateSessionsFromEnrollment(enrollment);
+    List<Session> sessions = await SessionServices.calculateSessionsFromEnrollment(enrollment);
     final FirebaseResponseWrapper<bool> response = await SessionServices.addListOfSessions(sessions);
     if (response.hasError) {
       return FirebaseResponseWrapper(
@@ -157,7 +157,7 @@ class EnrollmentServices {
     }
 
     // Step 2: Add new sessions for this enrollment
-    final List<Session> newSessions = SessionServices.calculateSessionsFromEnrollment(enrollment);
+    final List<Session> newSessions = await SessionServices.calculateSessionsFromEnrollment(enrollment);
 
     // Skipping the first concluded sessions
     final List<Session> newSessionsUnconcluded = newSessions.skip(concludedSessionCount).toList();

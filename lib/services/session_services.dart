@@ -3,9 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:rfid_system/model/entities/enrollment.dart';
 import 'package:rfid_system/model/entities/session.dart';
 import 'package:rfid_system/model/entities/student.dart';
+import 'package:rfid_system/model/entities/vacation.dart';
 import 'package:rfid_system/model/ui/full_session.dart';
 import 'package:rfid_system/services/response_wrapper.dart';
 import 'package:rfid_system/services/student_services.dart';
+import 'package:rfid_system/services/vacation_services.dart';
 import 'package:rfid_system/ui/utilities/date_utilities.dart';
 
 class SessionServices {
@@ -137,6 +139,7 @@ class SessionServices {
 
   static Future<FirebaseResponseWrapper<Session?>> getSession(String sessionId) {
     bool hasError = false;
+
     return FirebaseFirestore.instance
         .collection(
           'Sessions',
@@ -274,7 +277,10 @@ class SessionServices {
     );
   }
 
-  static List<Session> calculateSessionsFromEnrollment(Enrollment enrollment) {
+  static Future<List<Session>> calculateSessionsFromEnrollment(Enrollment enrollment) async {
+    final FirebaseResponseWrapper<List<Vacation>> vacationsResponse = await VacationServices.getVacations();
+    final List<DateTime> vacationDates = vacationsResponse.data.map<DateTime>((Vacation vacation) => vacation.date).toList();
+
     final List<Session> sessions = [];
     final DateTime startTime = enrollment.startDate;
     DateTime minDate = startTime.subtract(const Duration(days: 1)); // To ensure not getting stuck on the same date
@@ -285,7 +291,7 @@ class SessionServices {
 
     while (sessionCount > 0) {
       // Get the next appropriate day
-      minDate = _getNearestAppropriateDay(minDate, enrollment.days);
+      minDate = _getNearestAppropriateDay(minDate, enrollment.days, vacationDates);
       sessions.add(Session(
         absent: enrollment.studentIds,
         attended: [],
@@ -300,6 +306,7 @@ class SessionServices {
       sessionCount--;
     }
 
+    // Checking the dates in the console
     for (var element in sessions) {
       debugPrint(DateUtilities.formatDateTime(element.expectedStartTime));
     }
@@ -307,13 +314,17 @@ class SessionServices {
     return sessions;
   }
 
-  static DateTime _getNearestAppropriateDay(DateTime minDate, Map<String, DateTime> days) {
+  static DateTime _getNearestAppropriateDay(DateTime minDate, Map<String, DateTime> days, List<DateTime> vacationDates) {
     DateTime result = minDate.add(const Duration(days: 1)); // To ensure not getting stuck on the same date
     List<int> acceptedDayIndices = days.keys.map<int>(_mapDayToIndex).toList();
 
     while (true) {
       if (acceptedDayIndices.contains(result.weekday)) {
-        return _combineDateWithTime(result, days[_mapIndexToDay(result.weekday)]!);
+        final DateTime candidateDate = _combineDateWithTime(result, days[_mapIndexToDay(result.weekday)]!);
+        // Checking if the candidate date day and month match any vacation date
+        if (!vacationDates.any((element) => element.day == candidateDate.day && element.month == candidateDate.month)) {
+          return candidateDate;
+        }
       }
 
       result = result.add(const Duration(days: 1));

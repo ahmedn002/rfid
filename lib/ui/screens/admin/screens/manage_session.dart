@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rfid_system/model/entities/session.dart';
 import 'package:rfid_system/model/ui/course_data.dart';
+import 'package:rfid_system/services/session_services.dart';
+import 'package:rfid_system/tools/send_data_service_handler.dart';
 import 'package:rfid_system/ui/constants/text_styles.dart';
 import 'package:rfid_system/ui/screens/auth/components/input_field.dart';
 import 'package:rfid_system/ui/screens/teacher/concluded%20session/concluded_session.dart';
@@ -77,8 +79,14 @@ class _ManageSessionScreenState extends State<ManageSessionScreen> {
             MainButton(
               text: 'Edit Session',
               icon: const Icon(Icons.edit_rounded),
-              onPressed: () {
-                Navigator.pop(context, _selectedExpectedStartTime);
+              onPressed: () async {
+                await RequestHandler.handleRequest(
+                  context: context,
+                  service: () => SessionServices.rewriteSession(widget.session.copyWith(expectedStartTime: _selectedExpectedStartTime)),
+                  onSuccess: () {
+                    widget.onSessionEdit?.call();
+                  },
+                );
               },
             ),
             20.verticalSpace,

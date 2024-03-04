@@ -21,6 +21,8 @@ class CreateCourseScreen extends StatefulWidget {
 }
 
 class _CreateCourseScreenState extends State<CreateCourseScreen> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   // Level slider from ints 1 to 10
   int _level = 1;
 
@@ -78,6 +80,7 @@ class _CreateCourseScreenState extends State<CreateCourseScreen> {
             ),
             20.verticalSpace,
             Form(
+              key: _formKey,
               child: Column(
                 children: [
                   InputField(
@@ -111,6 +114,9 @@ class _CreateCourseScreenState extends State<CreateCourseScreen> {
               text: '${widget.edit ? 'Edit' : 'Create'} Course',
               icon: Icon(widget.edit ? Icons.edit_rounded : Icons.add_rounded),
               onPressed: () {
+                if (!_formKey.currentState!.validate()) {
+                  return;
+                }
                 if (widget.edit) {
                   RequestHandler.handleRequest(
                     context: context,

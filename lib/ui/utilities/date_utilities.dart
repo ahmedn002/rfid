@@ -19,6 +19,7 @@ class DateUtilities {
       minute = '0$minute';
     }
 
+    // 12:09 AM
     return '$hour:$minute $amPm';
   }
 
@@ -28,10 +29,12 @@ class DateUtilities {
   }
 
   static String formatDate(DateTime date) {
+    // 2021-09-01
     return '${date.year}-${date.month}-${date.day}';
   }
 
   static String formatDateTime(DateTime date) {
+    // 2021/09/01 - 12:09 AM
     return '${date.year}/${date.month}/${date.day} - ${formatTime(date)}';
   }
 }

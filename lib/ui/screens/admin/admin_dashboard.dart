@@ -5,8 +5,10 @@ import 'package:rfid_system/ui/constants/text_styles.dart';
 import 'package:rfid_system/ui/providers/auth_provider.dart';
 import 'package:rfid_system/ui/screens/admin/screens/create_course.dart';
 import 'package:rfid_system/ui/screens/admin/screens/create_enrollment.dart';
+import 'package:rfid_system/ui/screens/admin/screens/create_vacation_day.dart';
 import 'package:rfid_system/ui/screens/admin/screens/manage%20courses.dart';
 import 'package:rfid_system/ui/screens/admin/screens/manage_enrollments.dart';
+import 'package:rfid_system/ui/screens/admin/screens/manage_vacation_days.dart';
 import 'package:rfid_system/ui/screens/admin/screens/password_reset_requests.dart';
 import 'package:rfid_system/ui/screens/auth/signin/signin_screen.dart';
 import 'package:rfid_system/ui/widgets/app_bar.dart';
@@ -87,6 +89,26 @@ class _AdminDashboardState extends State<AdminDashboard> {
                 onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => const ManageEnrollmentsScreen(),
+                  ),
+                ),
+              ),
+              10.verticalSpace,
+              MainButton(
+                text: 'Add Vacation Day',
+                icon: const Icon(Icons.add_rounded),
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const CreateVacationDay(),
+                  ),
+                ),
+              ),
+              10.verticalSpace,
+              MainButton(
+                text: 'Manage Vacation Days',
+                icon: const Icon(Icons.edit_rounded),
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const ManageVacationDaysScreen(),
                   ),
                 ),
               ),
