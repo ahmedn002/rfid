@@ -70,41 +70,7 @@ class _StartSessionScreenState extends State<StartSessionScreen> {
                         );
                       }
                     });
-                    return Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Row(
-                            children: [
-                              Expanded(child: Text('Enter session code on your system keypad to start.', style: TextStyles.title)),
-                              Icon(Icons.keyboard_alt_rounded, size: 60.r),
-                            ],
-                          ),
-                          40.verticalSpace,
-                          Container(
-                            padding: EdgeInsets.all(10.r),
-                            decoration: BoxDecoration(
-                              color: AppColors.lightAccent,
-                              borderRadius: BorderRadius.circular(25.r),
-                            ),
-                            child: Text(widget.session.id, style: TextStyles.title.apply(fontSizeFactor: 3.5, color: AppColors.accent)),
-                          ),
-                          40.verticalSpace,
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text('Waiting for your input...', style: TextStyles.bodySecondary),
-                              10.horizontalSpace,
-                              SizedBox(
-                                width: 20.r,
-                                height: 20.r,
-                                child: const CircularProgressIndicator(),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    );
+                    return WaitingForSessionStartScreen(widget: widget);
                   } else {
                     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
                       if (!_sessionStarted) {
@@ -113,50 +79,7 @@ class _StartSessionScreenState extends State<StartSessionScreen> {
                         });
                       }
                     });
-                    return Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.check_circle_rounded,
-                                color: AppColors.success,
-                                size: 115.r,
-                              ),
-                              20.horizontalSpace,
-                              Expanded(
-                                child: Container(
-                                  padding: EdgeInsets.all(10.r),
-                                  decoration: BoxDecoration(
-                                    color: AppColors.lightAccent,
-                                    borderRadius: BorderRadius.circular(25.r),
-                                  ),
-                                  child: FittedBox(child: Text(widget.session.id, style: TextStyles.title.apply(fontSizeFactor: 3, color: AppColors.accent))),
-                                ),
-                              ),
-                            ],
-                          ),
-                          20.verticalSpace,
-                          Text('Session started successfully!', style: TextStyles.title),
-                          10.verticalSpace,
-                          Text('You can now start scanning tags.', style: TextStyles.body),
-                          20.verticalSpace,
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text('Waiting for you to end session...', style: TextStyles.bodySecondary),
-                              10.horizontalSpace,
-                              SizedBox(
-                                width: 20.r,
-                                height: 20.r,
-                                child: const CircularProgressIndicator(),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    );
+                    return WaitingForSessionEndScreen(widget: widget);
                   }
                 } else {
                   return const Center(
@@ -167,6 +90,111 @@ class _StartSessionScreenState extends State<StartSessionScreen> {
             },
           ),
         ),
+      ),
+    );
+  }
+}
+
+class WaitingForSessionEndScreen extends StatelessWidget {
+  const WaitingForSessionEndScreen({
+    super.key,
+    required this.widget,
+  });
+
+  final StartSessionScreen widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.check_circle_rounded,
+                color: AppColors.success,
+                size: 115.r,
+              ),
+              20.horizontalSpace,
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.all(10.r),
+                  decoration: BoxDecoration(
+                    color: AppColors.lightAccent,
+                    borderRadius: BorderRadius.circular(25.r),
+                  ),
+                  child: FittedBox(child: Text(widget.session.id, style: TextStyles.title.apply(fontSizeFactor: 3, color: AppColors.accent))),
+                ),
+              ),
+            ],
+          ),
+          20.verticalSpace,
+          Text('Session started successfully!', style: TextStyles.title),
+          10.verticalSpace,
+          Text('You can now start scanning tags.', style: TextStyles.body),
+          20.verticalSpace,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Waiting for you to end session...', style: TextStyles.bodySecondary),
+              10.horizontalSpace,
+              SizedBox(
+                width: 20.r,
+                height: 20.r,
+                child: const CircularProgressIndicator(),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class WaitingForSessionStartScreen extends StatelessWidget {
+  const WaitingForSessionStartScreen({
+    super.key,
+    required this.widget,
+  });
+
+  final StartSessionScreen widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            children: [
+              Expanded(child: Text('Enter session code on your system keypad to start.', style: TextStyles.title)),
+              Icon(Icons.keyboard_alt_rounded, size: 60.r),
+            ],
+          ),
+          40.verticalSpace,
+          Container(
+            padding: EdgeInsets.all(10.r),
+            decoration: BoxDecoration(
+              color: AppColors.lightAccent,
+              borderRadius: BorderRadius.circular(25.r),
+            ),
+            child: Text(widget.session.id, style: TextStyles.title.apply(fontSizeFactor: 3.5, color: AppColors.accent)),
+          ),
+          40.verticalSpace,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Waiting for your input...', style: TextStyles.bodySecondary),
+              10.horizontalSpace,
+              SizedBox(
+                width: 20.r,
+                height: 20.r,
+                child: const CircularProgressIndicator(),
+              ),
+            ],
+          )
+        ],
       ),
     );
   }

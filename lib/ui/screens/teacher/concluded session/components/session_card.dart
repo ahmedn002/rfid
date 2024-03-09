@@ -57,7 +57,7 @@ class SessionCard extends StatelessWidget {
                   ),
                 ),
                 8.verticalSpace,
-                if (session.concluded) keyValueRichText('Concluded at: ', DateUtilities.formatDateTime(session.endTime ?? DateTime.now())),
+                if (session.concluded) keyValueRichText('Concluded at: ', DateUtilities.formatDateTime(session.expectedEndTime)),
                 if (!session.concluded) keyValueRichText('Starts at: ', DateUtilities.formatDateTime(session.expectedStartTime)),
               ],
             ),

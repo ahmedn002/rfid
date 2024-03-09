@@ -65,7 +65,7 @@ class TeacherNavigationDrawer extends StatelessWidget {
                               color: AppColors.success.withOpacity(0.25),
                             ),
                             child: Text(
-                              'Teacher',
+                              'Instructor',
                               style: TextStyles.bodySmall.apply(
                                 color: AppColors.success,
                                 fontWeightDelta: 2,

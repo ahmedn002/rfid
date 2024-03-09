@@ -95,7 +95,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                   },
                                 ),
                                 SelectButton(
-                                  text: 'Teacher',
+                                  text: 'Instructor',
                                   isSelected: !_signInIsStudent,
                                   onTap: () {
                                     setState(() {
@@ -280,7 +280,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       },
                     ),
                     SelectButton(
-                      text: 'Teacher',
+                      text: 'Instructor',
                       isSelected: !_resetIsStudent,
                       onTap: () {
                         setState(() {

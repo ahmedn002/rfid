@@ -12,9 +12,7 @@ class Session implements IdCreator {
   String courseName;
   String enrollmentID;
   DateTime expectedStartTime;
-  DateTime? startTime;
   DateTime expectedEndTime;
-  DateTime? endTime;
   bool state;
   bool concluded = false;
   num? attendance;
@@ -27,9 +25,7 @@ class Session implements IdCreator {
     required this.courseName,
     required this.enrollmentID,
     required this.expectedStartTime,
-    this.startTime,
     required this.expectedEndTime,
-    this.endTime,
     required this.state,
     required this.concluded,
     this.attendance,
@@ -48,9 +44,7 @@ class Session implements IdCreator {
       courseName: json['course_name'],
       enrollmentID: json['enrollmentID'],
       expectedStartTime: (json['expectedStartTime'] as Timestamp).toDate(),
-      startTime: json['start_time'] != null ? (json['start_time'] as Timestamp).toDate() : null,
       expectedEndTime: (json['expectedEndTime'] as Timestamp).toDate(),
-      endTime: json['end_time'] != null ? (json['end_time'] as Timestamp).toDate() : null,
       state: json['state'],
       concluded: json['concluded'],
       attendance: json['attendance'],
@@ -65,9 +59,7 @@ class Session implements IdCreator {
       'course_name': courseName,
       'enrollmentID': enrollmentID,
       'expectedStartTime': expectedStartTime,
-      'start_time': startTime,
       'expectedEndTime': expectedEndTime,
-      'end_time': endTime,
       'state': state,
       'concluded': concluded,
       'attendance': attendance,
@@ -101,9 +93,7 @@ class Session implements IdCreator {
       courseName: courseName ?? this.courseName,
       enrollmentID: enrollmentID ?? this.enrollmentID,
       expectedStartTime: expectedStartTime ?? this.expectedStartTime,
-      startTime: startTime ?? this.startTime,
       expectedEndTime: expectedEndTime ?? this.expectedEndTime,
-      endTime: endTime ?? this.endTime,
       state: state ?? this.state,
       concluded: concluded ?? this.concluded,
       attendance: attendance ?? this.attendance,

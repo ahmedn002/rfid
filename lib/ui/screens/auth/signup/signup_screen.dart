@@ -60,7 +60,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                   ),
                   SelectButton(
-                    text: 'Teacher',
+                    text: 'Instructor',
                     isSelected: !isStudent,
                     onTap: () {
                       setState(() {
